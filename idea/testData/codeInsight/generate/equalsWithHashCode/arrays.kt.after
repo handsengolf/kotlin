@@ -9,7 +9,7 @@ class A(val n: IntArray, val s: Array<String>) {
 
     <caret>override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other?.javaClass != javaClass) return false
+        if (other == null || other::class != this::class) return false
 
         other as A
 

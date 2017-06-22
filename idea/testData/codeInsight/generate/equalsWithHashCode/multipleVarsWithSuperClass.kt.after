@@ -12,7 +12,7 @@ class A(val n: Int, val s: String) : X() {
 
     <caret>override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other?.javaClass != javaClass) return false
+        if (other == null || other::class != this::class) return false
         if (!super.equals(other)) return false
 
         other as A
