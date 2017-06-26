@@ -243,8 +243,9 @@ class KotlinPositionManager(private val myDebugProcess: DebugProcess) : MultiReq
         throw NoDataException.INSTANCE
     }
 
-    fun originalClassNameForPosition(position: SourcePosition): List<String> {
-        return DebuggerClassNameProvider(myDebugProcess, scopes).getOuterClassNamesForPosition(position)
+    fun originalClassNameForPosition(position: SourcePosition): String? {
+        val debuggerClassNameProvider = DebuggerClassNameProvider(myDebugProcess, scopes, findInlineUseSites = false)
+        return debuggerClassNameProvider.getOuterClassNamesForPosition(position).firstOrNull()
     }
 
     override fun locationsOfLine(type: ReferenceType, position: SourcePosition): List<Location> {
